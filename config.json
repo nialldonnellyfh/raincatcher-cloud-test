@@ -1,8 +1,8 @@
 {
   "component_metrics": {
     "enabled": false,
-    "host": "192.168.33.1",
-    "port": 4444
+    "host": "1.2.3.4",
+    "port": 8086
   },
   "sync": {
     "datasetId" : "workorders",
@@ -10,5 +10,6 @@
       "sync_frequency" : 5,
       "do_console_log": false
     }
-  }
+  },
+  "app_name": "test_raincatcher_app"
 }
