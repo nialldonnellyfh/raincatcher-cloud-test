@@ -1,0 +1,14 @@
+{
+  "component_metrics": {
+    "enabled": false,
+    "host": "192.168.33.1",
+    "port": 4444
+  },
+  "sync": {
+    "datasetId" : "workorders",
+    "syncOptions" : {
+      "sync_frequency" : 5,
+      "do_console_log": false
+    }
+  }
+}
