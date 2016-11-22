@@ -12,17 +12,18 @@ securableEndpoints = [];
 var metricsConfig = {
   enabled: process.env.API_METRICS_ENABLED ? true : false,
   host: process.env.API_METRICS_HOST ? process.env.API_METRICS_HOST : config.component_metrics.host,
-  port: process.env.API_METRICS_PORT ? process.env.API_METRICS_PORT : config.component_metrics.port
+  port: process.env.API_METRICS_PORT ? process.env.API_METRICS_PORT : config.component_metrics.port,
+  app_name: process.env.FH_APPNAME ? process.env.FH_APPNAME : config.app_name
 };
 
 
-metrics.memory(config.app_name, metricsConfig, function(err) {
+metrics.memory(metricsConfig.app_name, metricsConfig, function(err) {
   if(err) {
     console.log("Error logging memory stats", err)
   }
 });
 
-metrics.cpu(config.app_name, config.component_metrics, function(err) {
+metrics.cpu(metricsConfig.app_name, config.component_metrics, function(err) {
   if(err) {
     console.log("Error logging cpu stats", err)
   }
@@ -34,7 +35,7 @@ var app = express();
 // Enable CORS for all requests
 app.use(cors());
 
-app.use(fhComponentMetrics.timingMiddleware(config.app_name, metricsConfig));
+app.use(fhComponentMetrics.timingMiddleware(metricsConfig.app_name, metricsConfig));
 
 // Note: the order which we add middleware to Express here is important!
 app.use('/sys', mbaasExpress.sys(securableEndpoints));
